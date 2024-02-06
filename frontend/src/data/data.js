@@ -1,3 +1,5 @@
+// import crousel images
+
 import img1 from "../assets/carousel_images/1.jpg";
 import img2 from "../assets/carousel_images/2.jpg";
 import img3 from "../assets/carousel_images/3.jpg";
@@ -10,6 +12,9 @@ import img9 from "../assets/carousel_images/9.jpg";
 import img10 from "../assets/carousel_images/10.webp";
 import img11 from "../assets/carousel_images/11.jpg";
 import img12 from "../assets/carousel_images/12.jpg";
+
+// import service images
+import services1 from "../assets/services/services_1.webp";
 
 export const carouselImagesData = [
   img1,
@@ -24,4 +29,49 @@ export const carouselImagesData = [
   img10,
   img11,
   img12,
+];
+
+export const servicesData = [
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: services1,
+    title: "Panting",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
 ];
