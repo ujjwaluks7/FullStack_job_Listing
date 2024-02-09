@@ -8,7 +8,7 @@ import Services from "../../components/services/Services";
 export class Home extends Component {
   render() {
     return (
-      <div className="h-[1000px] ">
+      <div>
         <div>
           <HeroCarousel />
         </div>
