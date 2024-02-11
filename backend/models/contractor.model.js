@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 
-const labourSchema = new mongoose.Schema(
+const contractorSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -16,7 +15,7 @@ const labourSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: ["Male", "Female"],
       required: true,
     },
     age: {
@@ -30,12 +29,14 @@ const labourSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      required: true,
     },
-    skills: [
-      {
-        type: String,
-      },
-    ],
+    companyName: {
+      type: String,
+    },
+    companyAddress: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,
@@ -53,15 +54,11 @@ const labourSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: ["Labour", "Contractor", "Admin"],
-      default: "Labour",
+      default: "Contractor",
     },
   },
   { timestamps: true }
 );
-
-labourSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 13);
-});
 
 const Labour = mongoose.model("Labour", labourSchema);
 export default Labour;
