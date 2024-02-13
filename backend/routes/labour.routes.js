@@ -1,7 +1,11 @@
 import express from "express";
 const router = express.Router();
-import { labourRegister } from "../controllers/labour.controllers.js";
+import {
+  labourRegister,
+  labourLogin,
+} from "../controllers/labour.controllers.js";
 
 router.post("/register", labourRegister);
+router.post("/login", labourLogin);
 
 export default router;
