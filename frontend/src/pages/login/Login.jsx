@@ -32,8 +32,8 @@ function Login() {
         setLoading(false);
       } else {
         toast.success(respnse.message);
-        localStorage.setItem("shramil_token", respnse?.data?.token);
-        localStorage.setItem("shramil_role", respnse?.data?.role);
+        localStorage.setItem("shramik_token", respnse?.data?.token);
+        localStorage.setItem("shramik_role", respnse?.data?.role);
         setLoading(false);
         if (respnse.data.role === "Contractor") {
           navigate("/contractor");

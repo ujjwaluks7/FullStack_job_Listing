@@ -43,12 +43,20 @@ const labourSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
+      default:
+        "https://res.cloudinary.com/dm5jioyem/image/upload/v1706093961/brzp04glbrjsnmygxidc.png",
     },
     isBlock: {
       type: Boolean,
       required: true,
       default: false,
     },
+    applayed: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
     role: {
       type: String,
       required: true,

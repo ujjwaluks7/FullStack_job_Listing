@@ -1,8 +1,9 @@
 import express from "express";
 const router = express.Router();
 import authMiddleware from "../middleware/authMiddleware.js";
-import { labourRegister } from "../controllers/labour.controllers.js";
+import { login, userInfo } from "../controllers/comman.controllers.js";
 
-router.post("/register", labourRegister);
+router.post("/login", login);
+router.get("/info", authMiddleware, userInfo);
 
 export default router;
