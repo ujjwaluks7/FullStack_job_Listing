@@ -15,6 +15,12 @@ import img12 from "../assets/carousel_images/12.jpg";
 
 // import service images
 import services1 from "../assets/services/services_1.webp";
+import plumber from "../assets/services/plumber.jpg";
+import electrician from "../assets/services/electric.jpg";
+// import services1 from "../assets/services/services_1.webp";
+// import services1 from "../assets/services/services_1.webp";
+// import services1 from "../assets/services/services_1.webp";
+// import services1 from "../assets/services/services_1.webp";
 
 export const carouselImagesData = [
   img1,
@@ -31,46 +37,47 @@ export const carouselImagesData = [
   img12,
 ];
 
+
 export const servicesData = [
   {
     imgUrl: services1,
-    title: "Panting",
+    title: "Painter",
     content:
       "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
   },
   {
     imgUrl: services1,
-    title: "Panting",
+    title: "Carpenter",
     content:
       "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
   },
   {
     imgUrl: services1,
-    title: "Panting",
+    title: "Manson",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: plumber,
+    title: "Plumber",
     content:
       "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
   },
   {
     imgUrl: services1,
-    title: "Panting",
+    title: "Welder",
+    content:
+      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+  },
+  {
+    imgUrl: electrician,
+    title: "Electrician",
     content:
       "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
   },
   {
     imgUrl: services1,
-    title: "Panting",
-    content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
-  },
-  {
-    imgUrl: services1,
-    title: "Panting",
-    content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
-  },
-  {
-    imgUrl: services1,
-    title: "Panting",
+    title: "Bar Bender",
     content:
       "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
   },
