@@ -3,6 +3,7 @@ import HeroCarousel from "../../components/heroCarousel/HeroCarousel";
 import SearchBox from "../../components/searchBox/SearchBox";
 import Workers from "../../components/workers/Workers";
 import Services from "../../components/services/Services";
+import SmallModal from "../../components/smallModal/SmallModal";
 // import "../../hiddenScrollBar.css";
 
 export class Home extends Component {
@@ -26,6 +27,7 @@ export class Home extends Component {
         <div className="flex justify-center py-4">
           <Workers />
         </div>
+        <SmallModal />
         <div className="sm:px-[60px] px-5 py-5">
           <h2 className="text-3xl font-bold pb-3 ">Our Services</h2>
           <div className=" flex overflow-x-auto  ">

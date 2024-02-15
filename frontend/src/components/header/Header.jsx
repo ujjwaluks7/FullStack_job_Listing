@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import MobileHeader from "../mobileHeader/MobileHeader";
 import avatarIcon from "../../assets/avatar_icon.png";
 import { getUserInfo } from "../../API/apiCall";
+import SmallModal from "../smallModal/SmallModal";
 
 function Header() {
   const [isOpenMobileManu, setIsOpenMobileManu] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     checkIsLogin();
@@ -22,6 +24,10 @@ function Header() {
     } else {
       setIsLogin(false);
     }
+  }
+
+  function handelOpenSmallModal() {
+    setIsOpen(true);
   }
 
   return (
@@ -55,13 +61,21 @@ function Header() {
               Language
             </button>
             {isLogin ? (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 relative">
                 <p>{isLogin?.name}</p>
                 <img
+                  onClick={handelOpenSmallModal}
                   className="w-[40px] cursor-pointer"
                   src={isLogin?.profilePic}
                   alt="avatar image"
                 />
+                <div className="absolute top-11 left-10">
+                  <SmallModal
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    role={isLogin.role}
+                  />
+                </div>
               </div>
             ) : (
               <>
@@ -85,6 +99,7 @@ function Header() {
           <MobileHeader
             isOpenMobileManu={isOpenMobileManu}
             setIsOpenMobileManu={setIsOpenMobileManu}
+            isLogin={isLogin}
           />
         </div>
       </div>

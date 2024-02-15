@@ -7,7 +7,8 @@ import Footer from "./components/footer/footer";
 import LabourRegister from "./pages/registration/LabourRegister";
 import ContractorRegister from "./pages/registration/ContractorRegistration";
 import ContractorHome from "./pages/contractor/ContractorHome";
-
+import ContractorProfile from "./pages/contractor/ContractorProfile";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 function App() {
   return (
     <div>
@@ -18,7 +19,23 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/labour/register" element={<LabourRegister />} />
           <Route path="/contractor/register" element={<ContractorRegister />} />
-          <Route path="/contractor" element={<ContractorHome />} />
+
+          <Route
+            path="/contractor"
+            element={
+              <ProtectedRoute>
+                <ContractorHome />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contractor/profile"
+            element={
+              <ProtectedRoute>
+                <ContractorProfile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

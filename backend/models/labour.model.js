@@ -53,7 +53,7 @@ const labourSchema = new mongoose.Schema(
     },
     applayed: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
       },
     ],

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "./SideBar";
-// import TopNavBar from "../topnavbar/TopNavBar";
+import MobileSideBar from "./MobileSideBar";
+import { SlArrowRight } from "react-icons/sl";
 
 function Layout({ children }) {
+  const [isOpenMobileSidebar, setIsOpenMobileSideBar] = useState(true);
   return (
     <div className="">
       {/* Mobile Navbar hidden on desktop  */}
       <div className=" md:hidden">
-        this is top
-        {/* <TopNavBar /> */}
+        <div
+          className={` top-0 absolute transition-all duration-300 ${
+            isOpenMobileSidebar ? "left-[0px]" : "left-[-250px]"
+          }`}
+        >
+          <MobileSideBar setIsOpenMobileSideBar={setIsOpenMobileSideBar} />
+        </div>
+        <SlArrowRight
+          onClick={() => setIsOpenMobileSideBar(true)}
+          className=" text-blue-600  text-2xl mt-2 cursor-pointer"
+        />
       </div>
 
       <div className=" max-h-screen flex">
