@@ -4,8 +4,6 @@ import { FaPhone } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import googlePlayImg from "../../assets/google-play.png";
 import appleStoreImg from "../../assets/app-store.png";
-// import payment1 from "../../assets/1st payment-method.png";
-// import payment2 from "../../assets/2nd payment-method.png";
 import {
   FaSquareInstagram,
   FaLinkedin,

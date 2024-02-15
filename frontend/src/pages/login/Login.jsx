@@ -4,6 +4,7 @@ import loginImg from "../../assets/login_img.png";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEyeSlash, FaEye, FaGoogle } from "react-icons/fa";
 import Spinner from "../../components/spinner/Spinner";
+import { login } from "../../API/apiCall";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,10 +22,25 @@ function Login() {
 
     if (!email || !password) {
       toast.error("All fields are required 😒");
-    } else if (!email.includes("." && "@")) {
+    } else if (!email.includes("@") || !email.includes(".")) {
       toast.error("please enter valid email ⚠️");
     } else {
-      toast.success("login 👍");
+      setLoading(true);
+      const respnse = await login(inputVal);
+      if (respnse.success !== true) {
+        toast.error(respnse.message);
+        setLoading(false);
+      } else {
+        toast.success(respnse.message);
+        localStorage.setItem("shramik_token", respnse?.data?.token);
+        localStorage.setItem("shramik_role", respnse?.data?.role);
+        setLoading(false);
+        if (respnse.data.role === "Contractor") {
+          navigate("/contractor");
+        } else {
+          navigate("/");
+        }
+      }
     }
   }
 
