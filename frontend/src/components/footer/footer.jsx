@@ -62,14 +62,14 @@ function Footer() {
           © 2024 Shramik saathi All Rights Reserved.
         </p>
         <div className="flex gap-3 text-2xl text-white pt-5">
-          <a href="https://www.facebook.com/rajeev.modi.1422" target="_blank">
+          <a href="https://www.facebook.com/" target="_blank">
             <FaFacebook />
           </a>
-          <a href="https://www.instagram.com/rajeev_coder" target="_blank">
+          <a href="https://www.instagram.com/" target="_blank">
             <FaSquareInstagram />
           </a>
           <a
-            href="https://www.linkedin.com/in/rajeev-kumar-774503264"
+            href="https://www.linkedin.com/in/ujjwaluks/"
             target="_blank"
           >
             <FaLinkedin />

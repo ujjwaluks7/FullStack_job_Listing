@@ -6,9 +6,9 @@ function SearchBox() {
   return (
     <div className=" flex justify-center ">
       <div className=" relative md:w-[80vw] w-[100vw] flex items-center md:shadow-md md:shadow-gray-100 p-4 rounded-full">
-        <IoSearch className="absolute left-5 text-3xl text-gray-500" />
+        <IoSearch className="absolute left-8 text-3xl text-gray-500" />
         <input
-          className="  border-2 w-full md:py-3 py-2 pl-7 border-gray-200 rounded-full focus:outline-none text-lg"
+          className="  border-2 w-full md:py-3 py-2 pl-14 border-gray-200 rounded-full focus:outline-none text-lg"
           type="text"
           placeholder="search hear..."
         />
