@@ -3,6 +3,8 @@ import signupImg from "../../assets/signup_img.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Spinner from "../../components/spinner/Spinner";
+import toast, { Toaster } from "react-hot-toast";
+import { contractorRegistration } from "../../API/apiCall";
 
 function ContractorRegister() {
   const navigate = useNavigate();
@@ -20,36 +22,28 @@ function ContractorRegister() {
   const [showPassword, setShowPassword] = useState("password");
   const [loading, setLoading] = useState(false);
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
-    const {
-      name,
-      email,
-      gender,
-      age,
-      phone,
-      address,
-      companyName,
-      companyAdderss,
-      password,
-    } = inputVal;
+    const { name, email, gender, age, phone, address, password } = inputVal;
 
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !gender ||
-      !age ||
-      !phone ||
-      !address ||
-      !companyAdderss ||
-      !companyName
-    ) {
-      alert("All fields are requide");
+    if (!name || !email || !password || !gender || !age || !phone || !address) {
+      toast.error("All fields are requide");
     } else if (!email.includes("@") || !email.includes(".")) {
-      alert("please enter valid email");
+      toast.error("please enter valid email");
+    } else if (phone.toString().length !== 10) {
+      toast.error("Please provide valid mobile number");
+    } else {
+      setLoading(true);
+      const res = await contractorRegistration(inputVal);
+      if (res.success === true) {
+        toast.success(res.message);
+        setLoading(false);
+        navigate("/login");
+      } else {
+        toast.error(res.message);
+        setLoading(false);
+      }
     }
-    console.log(inputVal);
   }
 
   function handlerChange(e) {
@@ -169,7 +163,7 @@ function ContractorRegister() {
                 placeholder="enter company address"
                 id="companyAddress"
                 name="companyAddress"
-                value={inputVal.companyAdderss}
+                // value={inputVal.companyAdderss}
                 onChange={(e) => handlerChange(e)}
               />
             </div>
@@ -214,6 +208,7 @@ function ContractorRegister() {
           </form>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

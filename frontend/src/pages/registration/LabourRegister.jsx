@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import signupImg from "../../assets/signup_img.png";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Spinner from "../../components/spinner/Spinner";
+import { labourRegistration } from "../../API/apiCall";
 
 function LabourRegister() {
   const navigate = useNavigate();
@@ -17,16 +19,29 @@ function LabourRegister() {
   const [showPassword, setShowPassword] = useState("password");
   const [loading, setLoading] = useState(false);
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     const { name, email, gender, age, phone, password } = inputVal;
 
     if (!name || !email || !password || !gender || !age || !phone) {
-      alert("All fields are requide");
+      toast.error("All fields are requide");
     } else if (!email.includes("@") || !email.includes(".")) {
-      alert("please enter valid email");
+      toast.error("please enter valid email");
+    } else if (phone.toString().length !== 10) {
+      toast.error("Please provide valid mobile number");
+    } else {
+      setLoading(true);
+      const res = await labourRegistration(inputVal);
+      console.log(res);
+      if (res.success === true) {
+        toast.success(res.message);
+        setLoading(false);
+        navigate("/login");
+      } else {
+        toast.error(res.message);
+        setLoading(false);
+      }
     }
-    console.log(inputVal);
   }
 
   function handlerChange(e) {
@@ -153,6 +168,7 @@ function LabourRegister() {
           </form>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

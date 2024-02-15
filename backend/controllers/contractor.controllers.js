@@ -30,17 +30,17 @@ const contractorRegister = async (req, res) => {
   ) {
     return res
       .status(404)
-      .json({ success: false, error: "All fields are required" });
+      .json({ success: false, message: "All fields are required" });
   }
   if (!email.includes("@") || !email.includes(".")) {
     return res
       .status(404)
-      .json({ success: false, error: "Please enter valid email" });
+      .json({ success: false, message: "Please enter valid email" });
   }
   if (!phone.toString().length === 10) {
     return res
       .status(404)
-      .json({ success: false, error: "Please enter mobile number" });
+      .json({ success: false, message: "Please enter mobile number" });
   }
 
   try {
@@ -48,7 +48,7 @@ const contractorRegister = async (req, res) => {
     if (existingContractor) {
       return res
         .status(404)
-        .json({ success: false, error: "contractor already exist" });
+        .json({ success: false, message: "contractor already exist" });
     }
 
     const newContractor = new Contractor({
@@ -63,10 +63,12 @@ const contractorRegister = async (req, res) => {
       password,
     });
     await newContractor.save();
-    res.status(200).json({ success: true, data: newContractor });
+    res
+      .status(200)
+      .json({ success: true, message: "Contractor successfully register" });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ success: false, error: error.message });
+    res.status(404).json({ success: false, message: error.message });
   }
 };
 
