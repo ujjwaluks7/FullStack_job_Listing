@@ -1,6 +1,11 @@
 import Labour from "../models/labour.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import path from "path";
+import {
+  deleteOnCloudinary,
+  uploadOnCloudinary,
+} from "../config/cloudinary.js";
 
 // register
 const labourRegister = async (req, res) => {
@@ -48,4 +53,103 @@ const labourRegister = async (req, res) => {
   }
 };
 
-export { labourRegister };
+// profile
+
+const labourProfile = async (req, res) => {
+  const labour = req.user;
+
+  if (!labour) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Labour not found" });
+  }
+
+  res.status(200).json({ success: true, message: "", data: labour });
+};
+
+// change profilepic
+
+const changeProfilePic = async (req, res) => {
+  const file = req.file?.originalname;
+  const labourId = req.user?._id;
+  const previousImage = req.user?.profilePic;
+
+  if (!file) {
+    return res
+      .status(404)
+      .json({ success: false, message: "please provide image" });
+  }
+
+  const extension = path.extname(file);
+  // check image extension
+  if (
+    extension !== ".png" &&
+    extension !== ".jpg" &&
+    extension !== ".jpeg" &&
+    extension !== ".webp"
+  ) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: "only .png , .jpeg , jpg and webp formate allowed",
+      });
+  }
+  // chaeck image size
+  if (req.file.size > 512000) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: "please provide image size less then 500kb",
+      });
+  }
+
+  try {
+    // upload image on cloudinary
+    const result = await uploadOnCloudinary(req.file.path);
+    if (!result) {
+      return res
+        .status(404)
+        .json({
+          success: false,
+          message: "Image not uploaded please try again",
+        });
+    }
+
+    // update profile pic
+    const previousImage = req.user?.profilePic;
+
+    const update = await Labour.findByIdAndUpdate(
+      labourId,
+      {
+        $set: {
+          profilePic: result?.secure_url,
+        },
+      },
+      { new: true }
+    );
+
+    // find previous image to cloudinaryId
+    if (previousImage) {
+      const imageIdArr = previousImage.split("/");
+      const imageId = imageIdArr[imageIdArr?.length - 1];
+      const cloudinaryId = imageId.split(".")[0];
+
+      // delete previous image function call
+      const deleteResponse = await deleteOnCloudinary(cloudinaryId);
+      console.log("deleteResponse", deleteResponse);
+      return res
+        .status(200)
+        .json({
+          success: true,
+          message: "image upload successfully",
+          data: result?.secure_url,
+        });
+    }
+  } catch (error) {
+    res.status(404).json({ success: false, message: error.message });
+  }
+};
+
+export { labourRegister, labourProfile, changeProfilePic };

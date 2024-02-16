@@ -9,6 +9,7 @@ import ContractorRegister from "./pages/registration/ContractorRegistration";
 import ContractorHome from "./pages/contractor/ContractorHome";
 import ContractorProfile from "./pages/contractor/ContractorProfile";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+import LabourProfile from "./pages/labour/LabourProfile";
 function App() {
   return (
     <div>
@@ -33,6 +34,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ContractorProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/labour/profile"
+            element={
+              <ProtectedRoute>
+                <LabourProfile />
               </ProtectedRoute>
             }
           />

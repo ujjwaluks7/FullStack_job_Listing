@@ -28,3 +28,13 @@ export const labourRegistration = async (body, header) => {
     header
   );
 };
+
+// labour profile
+export const fetchLabourProfile = async (header, body) => {
+  return await apiCommanRequest(
+    "POST",
+    `${BASE_URL}/labour/profile`,
+    body,
+    header
+  );
+};

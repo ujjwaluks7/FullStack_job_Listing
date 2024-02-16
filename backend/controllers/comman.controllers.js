@@ -11,9 +11,9 @@ export const login = async (req, res) => {
       .status(404)
       .json({ success: false, message: "All fields are required" });
   }
-
+  //localhost:7980/api/v1/contractor/login
   // email validation
-  if (!email.includes("@") || !email.includes(".")) {
+  http: if (!email.includes("@") || !email.includes(".")) {
     return res
       .status(404)
       .json({ success: false, message: "please enter valid email" });

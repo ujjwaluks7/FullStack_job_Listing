@@ -34,7 +34,7 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
               <SmallModal
                 isOpen={isOpenLeftModal}
                 setIsOpen={setIsOpenLeftModal}
-                role={isLogin.role}
+                role={isLogin?.role}
               />
             </div>
             <IoClose
@@ -108,7 +108,7 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
               <SmallModal
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
-                role={isLogin.role}
+                role={isLogin?.role}
               />
             </div>
           </div>

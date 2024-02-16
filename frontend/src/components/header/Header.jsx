@@ -73,7 +73,7 @@ function Header() {
                   <SmallModal
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
-                    role={isLogin.role}
+                    role={isLogin?.role}
                   />
                 </div>
               </div>
