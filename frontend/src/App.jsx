@@ -10,6 +10,8 @@ import ContractorHome from "./pages/contractor/ContractorHome";
 import ContractorProfile from "./pages/contractor/ContractorProfile";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 import LabourProfile from "./pages/labour/LabourProfile";
+import LabourUpdateProfile from "./pages/labour/LabourUpadteProfile";
+import CreatePost from "./pages/contractor/CreatePost";
 function App() {
   return (
     <div>
@@ -24,9 +26,17 @@ function App() {
           <Route
             path="/contractor"
             element={
-              <ProtectedRoute>
-                <ContractorHome />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <ContractorHome />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contractor/createpost"
+            element={
+              // <ProtectedRoute>
+              <CreatePost />
+              // </ProtectedRoute>
             }
           />
           <Route
@@ -45,6 +55,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="/update" element={<LabourUpdateProfile />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,0 +1,53 @@
+[
+  { "name": "Welder (वेल्डर)", "value": "Welder" },
+  { "name": "Plumber (प्लम्बर)", "value": "Plumber" },
+  { "name": "Electrician (इलेक्ट्रीशियन)", "value": "Electrician" },
+  { "name": "Painter (पेंटर)", "value": "Painter" },
+  { "name": "Bar bender Helper (सरिया हेल्पर)", "value": "Bar bender Helper" },
+  { "name": "Shuttering helper (शटरिंग हेल्पर)", "value": "Shuttering helper" },
+  { "name": "Mason Helper (मिस्त्री हेल्पर)", "value": "Mason Helper" },
+  {
+    "name": "Lanter worker helper (लेन्टर हेल्पर)",
+    "value": "Lanter worker helper"
+  },
+  {
+    "name": "Concrete mixer labour (कंक्रीट लेबर)",
+    "value": "Concrete mixer labour"
+  },
+  { "name": "Tiles Mason (टाइल्स मिस्त्री)", "value": "Tiles Mason" },
+  {
+    "name": "Cement Concrete Mason (कान्क्रीट मिस्त्री)",
+    "value": "Cement Concrete Mason"
+  },
+  { "name": "Bar bender (सरिया मिस्त्री)", "value": "Bar bender" },
+  { "name": "Marbles Mason (मार्बल मिस्त्री)", "value": "Marbles Mason" },
+  { "name": "Flooring (फर्श मिस्त्री)", "value": "Flooring" },
+  { "name": "Composite Mason (राजमिस्त्री)", "value": "Composite Mason" },
+  {
+    "name": "Garters/Columns Mason (पिलर मिस्त्री)",
+    "value": "Garters/Columns Mason"
+  },
+  {
+    "name": "Lime Concrete Mason (चुना मिस्त्री)",
+    "value": "Lime Concrete Mason"
+  },
+  { "name": "Stone mason (पथर मिस्त्री)", "value": "Stone mason" },
+  {
+    "name": "Plastering Mason (प्लास्टर मिस्त्री)",
+    "value": "Plastering Mason"
+  },
+  { "name": "Brick mason (ईट मिस्त्री)", "value": "Brick mason" },
+  { "name": "Putty (पुट्टी)", "value": "Putty" },
+  { "name": "POP (पी ओ पी)", "value": "POP" },
+  { "name": "Home/Wall painter (दीवार पेंटर)", "value": "Home/Wall painter" },
+  { "name": "Modular Kitchen (मॉडुलर किचन)", "value": "Modular Kitchen" },
+  {
+    "name": "Cupboard & drawer (अलमारी और दटाज)",
+    "value": "Cupboard & drawer"
+  },
+  { "name": "Door (दरवाजे)", "value": "Door" },
+  { "name": "Drill hanging (ड्रिल)", "value": "Drill hanging" },
+  { "name": "Other Furniture (फर्नीचर)", "value": "Other Furniture" },
+  { "name": "Sofa (सोफा)", "value": "Sofa" },
+  { "name": "Window (खिड़की)", "value": "Window" }
+]
