@@ -88,33 +88,27 @@ const changeProfilePic = async (req, res) => {
     extension !== ".jpeg" &&
     extension !== ".webp"
   ) {
-    return res
-      .status(404)
-      .json({
-        success: false,
-        message: "only .png , .jpeg , jpg and webp formate allowed",
-      });
+    return res.status(404).json({
+      success: false,
+      message: "only .png , .jpeg , jpg and webp formate allowed",
+    });
   }
   // chaeck image size
   if (req.file.size > 512000) {
-    return res
-      .status(404)
-      .json({
-        success: false,
-        message: "please provide image size less then 500kb",
-      });
+    return res.status(404).json({
+      success: false,
+      message: "please provide image size less then 500kb",
+    });
   }
 
   try {
     // upload image on cloudinary
     const result = await uploadOnCloudinary(req.file.path);
     if (!result) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "Image not uploaded please try again",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "Image not uploaded please try again",
+      });
     }
 
     // update profile pic
@@ -139,13 +133,11 @@ const changeProfilePic = async (req, res) => {
       // delete previous image function call
       const deleteResponse = await deleteOnCloudinary(cloudinaryId);
       console.log("deleteResponse", deleteResponse);
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "image upload successfully",
-          data: result?.secure_url,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "image upload successfully",
+        data: result?.secure_url,
+      });
     }
   } catch (error) {
     res.status(404).json({ success: false, message: error.message });
