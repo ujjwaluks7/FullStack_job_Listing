@@ -12,6 +12,10 @@ import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 import LabourProfile from "./pages/labour/LabourProfile";
 import LabourUpdateProfile from "./pages/labour/LabourUpadteProfile";
 import CreatePost from "./pages/contractor/CreatePost";
+import ContractorSinglePost from "./pages/contractor/ContractorSinglePost";
+import ContractorEditPost from "./pages/contractor/ContractorEditPost";
+// import ContractorEdit
+
 function App() {
   return (
     <div>
@@ -36,6 +40,22 @@ function App() {
             element={
               // <ProtectedRoute>
               <CreatePost />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contractor/post/view:id"
+            element={
+              // <ProtectedRoute>
+              <ContractorSinglePost />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contractor/post/edit:id"
+            element={
+              // <ProtectedRoute>
+              <ContractorEditPost />
               // </ProtectedRoute>
             }
           />

@@ -38,3 +38,27 @@ export const fetchLabourProfile = async (header, body) => {
     header
   );
 };
+
+// create post
+const data = {
+  name: "rajeev",
+  age: 20,
+};
+export const createPost = async (header, data) => {
+  console.log("body", data);
+  return await apiCommanRequest(
+    "POST",
+    `${BASE_URL}/contractor/createpost`,
+    data,
+    header
+  );
+};
+
+export const contractorAllPosts = async (header, body) => {
+  return await apiCommanRequest(
+    "POST",
+    `${BASE_URL}/contractor/allposts`,
+    body,
+    header
+  );
+};

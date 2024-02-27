@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Spinner from "../../components/spinner/Spinner";
 
-function CreatePost() {
+function ContractorEditPost() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -61,6 +61,7 @@ function CreatePost() {
       navigate("/login");
     }
   }
+
   return (
     <Layout>
       <div className="h-[90vh]">
@@ -203,7 +204,7 @@ function CreatePost() {
             {loading ? (
               <Spinner />
             ) : (
-              <button className=" hover:shadow-md">Signup</button>
+              <button className=" hover:shadow-md">Edit</button>
             )}
           </div>
         </form>
@@ -213,4 +214,4 @@ function CreatePost() {
   );
 }
 
-export default CreatePost;
+export default ContractorEditPost;

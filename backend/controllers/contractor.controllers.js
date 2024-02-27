@@ -156,6 +156,7 @@ export const contractorChangeProfilePic = async (req, res) => {
 // create job post
 
 export const createJobPost = async (req, res) => {
+  console.log("req.body", req.body);
   const {
     jobName,
     jobDescription,
@@ -206,6 +207,27 @@ export const createJobPost = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Post created successfully",
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// show all posts
+
+export const showAllPosts = async (req, res) => {
+  const contractorId = req.user?._id;
+
+  try {
+    const allPosts = await Post.find({ author: contractorId });
+
+    return res.status(200).json({
+      success: true,
+      message: "",
+      data: { totalPosts: allPosts.length, data: allPosts },
     });
   } catch (error) {
     return res.status(404).json({
