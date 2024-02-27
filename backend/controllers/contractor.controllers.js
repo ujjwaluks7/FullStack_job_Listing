@@ -1,4 +1,5 @@
 import Contractor from "../models/contractor.model.js";
+import Post from "../models/post.model.js";
 import bcrypt from "bcryptjs";
 import Jwt from "jsonwebtoken";
 import path from "path";
@@ -7,7 +8,7 @@ import {
   uploadOnCloudinary,
 } from "../config/cloudinary.js";
 // register
-const contractorRegister = async (req, res) => {
+export const contractorRegister = async (req, res) => {
   const {
     name,
     email,
@@ -78,7 +79,7 @@ const contractorRegister = async (req, res) => {
 
 // change profilepic
 
-const contractorChangeProfilePic = async (req, res) => {
+export const contractorChangeProfilePic = async (req, res) => {
   const file = req.file?.originalname;
   const contractorId = req.user?._id;
 
@@ -152,4 +153,64 @@ const contractorChangeProfilePic = async (req, res) => {
   }
 };
 
-export { contractorRegister, contractorChangeProfilePic };
+// create job post
+
+export const createJobPost = async (req, res) => {
+  const {
+    jobName,
+    jobDescription,
+    requiredSkill,
+    jobType,
+    state,
+    district,
+    city,
+    pincode,
+    address,
+  } = req.body;
+
+  const contractorId = req.user?._id;
+
+  if (
+    !jobName ||
+    !jobDescription ||
+    !requiredSkill ||
+    !jobType ||
+    !state ||
+    !district ||
+    !city ||
+    !pincode ||
+    !address
+  ) {
+    return res.status(404).json({
+      success: false,
+      message: "All fields are require",
+    });
+  }
+
+  try {
+    const newPost = await Post({
+      jobName,
+      jobDescription,
+      requiredSkill,
+      jobType,
+      author: contractorId,
+      state,
+      district,
+      city,
+      pincode,
+      address,
+    });
+
+    await newPost.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Post created successfully",
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

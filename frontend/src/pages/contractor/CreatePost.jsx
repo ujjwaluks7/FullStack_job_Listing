@@ -7,7 +7,7 @@ function CreatePost() {
   const [formData, setFormData] = useState({
     jobName: "",
     jobDescription: "",
-    skill: [],
+    requiredSkill: "",
     jobType: "",
     state: "Bihar",
     district: "",
@@ -61,12 +61,13 @@ function CreatePost() {
           <div className="flex flex-col mt-2">
             <label htmlFor="skill">Required skill*</label>
             <select
+              multiple={false}
               className="border-2 border-gray-300 rounded-lg px-2 py-1 focus:outline-none shadow-md shadow-gray-200"
               required
               id="slill"
               onChange={(e) => handlerChange(e)}
-              value={formData.skill}
-              name="skill"
+              value={formData.requiredSkill}
+              name="requiredSkill"
             >
               <option value="">--select--</option>
               {skills?.map((skill, i) => (
@@ -79,6 +80,7 @@ function CreatePost() {
           <div className="flex flex-col mt-2">
             <label htmlFor="jobType">Job Type*</label>
             <select
+              multiple={false}
               className="border-2 border-gray-300 rounded-lg px-2 py-1 focus:outline-none shadow-md shadow-gray-200"
               required
               id="jobType"
@@ -105,6 +107,7 @@ function CreatePost() {
           <div className="flex flex-col mt-2">
             <label htmlFor="district">District</label>
             <select
+              multiple={false}
               className="border-2 border-gray-300 rounded-lg px-2 py-1 focus:outline-none shadow-md shadow-gray-200"
               required
               id="district"
