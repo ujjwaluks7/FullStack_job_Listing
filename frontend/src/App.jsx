@@ -44,7 +44,7 @@ function App() {
             }
           />
           <Route
-            path="/contractor/post/view:id"
+            path="/contractor/post/view/:id"
             element={
               // <ProtectedRoute>
               <ContractorSinglePost />
@@ -52,7 +52,7 @@ function App() {
             }
           />
           <Route
-            path="/contractor/post/edit:id"
+            path="/contractor/post/edit/:id"
             element={
               // <ProtectedRoute>
               <ContractorEditPost />

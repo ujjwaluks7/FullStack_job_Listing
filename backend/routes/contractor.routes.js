@@ -3,7 +3,9 @@ import {
   contractorChangeProfilePic,
   contractorRegister,
   createJobPost,
+  deleteSinglePost,
   showAllPosts,
+  viewSinglePost,
 } from "../controllers/contractor.controllers.js";
 import contractorAuthMiddleware from "../middleware/contractorAuthMiddleware.js";
 import uploader from "../middleware/multerMiddleware.js";
@@ -18,6 +20,8 @@ router.post(
 );
 
 router.post("/createpost", contractorAuthMiddleware, createJobPost);
-router.post("/allposts", contractorAuthMiddleware, showAllPosts);
+router.get("/allposts", contractorAuthMiddleware, showAllPosts);
+router.delete("/delete/:id", contractorAuthMiddleware, deleteSinglePost);
+router.get("/view/:id", contractorAuthMiddleware, viewSinglePost);
 
 export default router;

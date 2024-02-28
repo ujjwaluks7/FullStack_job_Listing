@@ -236,3 +236,46 @@ export const showAllPosts = async (req, res) => {
     });
   }
 };
+
+// delete particular post
+
+export const deleteSinglePost = async (req, res) => {
+  const contractorId = req.user?._id;
+  const postId = req.params.id;
+
+  try {
+    const deletedPost = await Post.findByIdAndDelete(postId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Post deleted successfully",
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// view single post
+
+export const viewSinglePost = async (req, res) => {
+  const contractorId = req.user?._id;
+  const postId = req.params.id;
+
+  try {
+    const post = await Post.findById(postId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Post deleted successfully",
+      data: post,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -56,8 +56,26 @@ export const createPost = async (header, data) => {
 
 export const contractorAllPosts = async (header, body) => {
   return await apiCommanRequest(
-    "POST",
+    "GET",
     `${BASE_URL}/contractor/allposts`,
+    body,
+    header
+  );
+};
+
+export const deleteSinglePost = async (header, id, body) => {
+  return await apiCommanRequest(
+    "DELETE",
+    `${BASE_URL}/contractor/delete/${id}`,
+    body,
+    header
+  );
+};
+
+export const viewSinglePost = async (header, id, body) => {
+  return await apiCommanRequest(
+    "GET",
+    `${BASE_URL}/contractor/view/${id}`,
     body,
     header
   );

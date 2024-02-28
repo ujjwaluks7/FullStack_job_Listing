@@ -7,7 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { LuClipboardType } from "react-icons/lu";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { contractorAllPosts } from "../../API/apiCall";
+import { contractorAllPosts, deleteSinglePost } from "../../API/apiCall";
 import toast, { Toaster } from "react-hot-toast";
 import Spinner from "../../components/spinner/Spinner";
 import { CiCalendarDate } from "react-icons/ci";
@@ -46,6 +46,36 @@ function ContractorHome() {
       setLoading(false);
     }
   }
+
+  // delete handler
+
+  async function deleteHandler(id) {
+    const token = localStorage.getItem("shramik_token");
+
+    try {
+      const response = await deleteSinglePost(
+        {
+          authorization: `Bearer ${token}`,
+        },
+        id
+      );
+      console.log("response", response);
+      if (response.success === true) {
+        fetchPostsData();
+        toast.success(response.message);
+      } else if (response.message === "jwt expired") {
+        toast.error(response.message);
+        localStorage.removeItem("shramik_token");
+        localStorage.removeItem("shramik_role");
+        navigate("/login");
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error(response.message);
+    }
+  }
+
   return (
     <Layout>
       <div>
@@ -63,16 +93,19 @@ function ContractorHome() {
                   className="relative w-[60vw] shadow-md shadow-gray-200 rounded-md py-2 px-3"
                 >
                   <div className="absolute right-1 flex flex-col gap-3">
-                    <Link to={`/contractor/post/edit:id`}>
+                    <Link to={`/contractor/post/edit/${post?._id}`}>
                       <CiEdit className="cursor-pointer text-xl" />
                     </Link>
-                    <Link to={`/contractor/post/view:id`}>
+                    <Link to={`/contractor/post/view/${post?._id}`}>
                       <FaEye className="cursor-pointer text-xl" />
                     </Link>
-                    <MdDelete className="cursor-pointer text-xl text-red-500" />
+                    <MdDelete
+                      onClick={() => deleteHandler(post?._id)}
+                      className="cursor-pointer text-xl text-red-500"
+                    />
                   </div>
                   <h3 className="text-xl py-2 font-semibold">
-                    {post?.jobNmae}
+                    {post?.jobName}
                   </h3>
                   <p>{post?.jobDescription}</p>
                   <div className="flex gap-3">
