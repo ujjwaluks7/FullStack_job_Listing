@@ -86,7 +86,7 @@ function ContractorSinglePost() {
               </div>
               <div className="text-center">
                 <Link
-                  to={`contractor/post/edit/${id}`}
+                  to={`/contractor/post/edit/${id}`}
                   className="px-10 py-1 rounded-lg font-bold bg-blue-500 text-white cursor-pointer "
                 >
                   Edit

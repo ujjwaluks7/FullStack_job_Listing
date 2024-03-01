@@ -4,7 +4,7 @@ import MobileSideBar from "./MobileSideBar";
 import { SlArrowRight } from "react-icons/sl";
 
 function Layout({ children }) {
-  const [isOpenMobileSidebar, setIsOpenMobileSideBar] = useState(true);
+  const [isOpenMobileSidebar, setIsOpenMobileSideBar] = useState(false);
   return (
     <div className="">
       {/* Mobile Navbar hidden on desktop  */}

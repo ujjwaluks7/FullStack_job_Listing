@@ -156,7 +156,6 @@ export const contractorChangeProfilePic = async (req, res) => {
 // create job post
 
 export const createJobPost = async (req, res) => {
-  console.log("req.body", req.body);
   const {
     jobName,
     jobDescription,
@@ -270,6 +269,50 @@ export const viewSinglePost = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Post deleted successfully",
+      data: post,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// edit single post
+export const editSinglePost = async (req, res) => {
+  const contractorId = req.user?._id;
+  const postId = req.params.id;
+  const {
+    jobName,
+    jobDescription,
+    requiredSkill,
+    jobType,
+    state,
+    district,
+    city,
+    pincode,
+    address,
+  } = req.body;
+
+  try {
+    const post = await Post.findByIdAndUpdate(postId, {
+      $set: {
+        jobName,
+        jobDescription,
+        requiredSkill,
+        jobType,
+        state,
+        district,
+        city,
+        pincode,
+        address,
+      },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Post updated successfully",
       data: post,
     });
   } catch (error) {

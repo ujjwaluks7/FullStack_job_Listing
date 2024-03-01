@@ -45,7 +45,6 @@ const data = {
   age: 20,
 };
 export const createPost = async (header, data) => {
-  console.log("body", data);
   return await apiCommanRequest(
     "POST",
     `${BASE_URL}/contractor/createpost`,
@@ -76,6 +75,17 @@ export const viewSinglePost = async (header, id, body) => {
   return await apiCommanRequest(
     "GET",
     `${BASE_URL}/contractor/view/${id}`,
+    body,
+    header
+  );
+};
+
+// edit single post
+export const editSinglePost = async (header, id, body) => {
+  console.log("body", body);
+  return await apiCommanRequest(
+    "PUT",
+    `${BASE_URL}/contractor/edit/${id}`,
     body,
     header
   );

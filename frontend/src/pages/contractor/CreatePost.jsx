@@ -35,27 +35,36 @@ function CreatePost() {
         const response = await createPost(
           {
             authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           formData
         );
-        console.log(formData);
-        console.log(response);
         setLoading(true);
         if (response.success === true) {
-          setLoading(false);
           toast.success(response.message);
+          setFormData({
+            jobName: "",
+            jobDescription: "",
+            requiredSkill: "",
+            jobType: "",
+            state: "Bihar",
+            district: "",
+            city: "",
+            pincode: "",
+            address: "",
+          });
         } else if (response.message === "jwt expired") {
           toast.error(response.message);
           localStorage.removeItem("shramik_token");
           localStorage.removeItem("shramik_role");
-          setLoading(false);
           navigate("/login");
         } else {
           toast.error(response.message);
-          setLoading(false);
         }
       } catch (error) {
         toast.error(error.message);
+      } finally {
+        setLoading(false);
       }
     } else {
       navigate("/login");
@@ -199,11 +208,11 @@ function CreatePost() {
               name="address"
             />
           </div>
-          <div className="bg-blue-500 w-full rounded-lg flex justify-center  text-white text-lg py-1">
+          <div className="bg-blue-500 w-full rounded-lg flex justify-center  text-white text-lg py-1 mt-5">
             {loading ? (
               <Spinner />
             ) : (
-              <button className=" hover:shadow-md">Signup</button>
+              <button className=" hover:shadow-md">Submit</button>
             )}
           </div>
         </form>

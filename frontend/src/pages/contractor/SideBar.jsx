@@ -9,7 +9,7 @@ function SideBar() {
   const navigate = useNavigate();
 
   return (
-    <div className=" py-2 flex flex-col justify-center items-center gap-4  w-[250px] h-[calc(100vh-53px)] bg-[#286082]">
+    <div className=" py-2 flex flex-col justify-center items-center gap-4  w-[250px] h-[100vh] bg-[#286082]">
       <div className="flex items-center gap-3">
         <FcHome className="text-3xl shadow-md shadow-orange-500 bg-white rounded-full p-[1px]" />
         <NavLink

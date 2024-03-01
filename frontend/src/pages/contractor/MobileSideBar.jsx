@@ -8,8 +8,8 @@ import { SlArrowLeft } from "react-icons/sl";
 
 function MobileSideBar({ setIsOpenMobileSideBar }) {
   return (
-    <div className="z-20 py-2 flex flex-col justify-center items-center gap-4  w-[250px] h-[calc(100vh-53px)] bg-[#286082]">
-      <div className=" relative flex items-center gap-3">
+    <div className="z-30 absolute py-2 flex flex-col justify-center items-center gap-4  w-[250px] h-[115vh] bg-[#286082]">
+      <div className="relative flex items-center gap-3">
         <SlArrowLeft
           onClick={() => setIsOpenMobileSideBar(false)}
           className="absolute  top-[-40px] right-[-65px] text-white font-bold text-2xl animate-bounce cursor-pointer"

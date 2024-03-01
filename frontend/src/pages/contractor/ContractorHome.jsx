@@ -90,7 +90,7 @@ function ContractorHome() {
               return (
                 <div
                   key={post._id}
-                  className="relative w-[60vw] shadow-md shadow-gray-200 rounded-md py-2 px-3"
+                  className="relative md:w-[60vw] w-[90vw] shadow-md shadow-gray-200 rounded-md py-2 px-3"
                 >
                   <div className="absolute right-1 flex flex-col gap-3">
                     <Link to={`/contractor/post/edit/${post?._id}`}>
