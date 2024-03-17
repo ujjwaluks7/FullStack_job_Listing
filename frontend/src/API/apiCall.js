@@ -82,7 +82,6 @@ export const viewSinglePost = async (header, id, body) => {
 
 // edit single post
 export const editSinglePost = async (header, id, body) => {
-  console.log("body", body);
   return await apiCommanRequest(
     "PUT",
     `${BASE_URL}/contractor/edit/${id}`,
@@ -92,10 +91,18 @@ export const editSinglePost = async (header, id, body) => {
 };
 
 export const contractorProfile = async (header, body) => {
-  console.log("body", body);
   return await apiCommanRequest(
     "GET",
     `${BASE_URL}/contractor/profile`,
+    body,
+    header
+  );
+};
+
+export const updateLabourProfile = async (header, body) => {
+  return await apiCommanRequest(
+    "PUT",
+    `${BASE_URL}/labour/updateprofile`,
     body,
     header
   );

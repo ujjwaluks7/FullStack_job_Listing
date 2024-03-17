@@ -1,22 +1,71 @@
 import React, { useState } from "react";
+import skills from "../../config/skills.json";
+import { updateLabourProfile } from "../../API/apiCall";
+import toast, { Toaster } from "react-hot-toast";
+import Spinner from "../../components/spinner/Spinner";
 
-function LabourUpdateProfile() {
-  const [showModal, setShowModal] = React.useState(true);
-  const [inputVal, setInputVal] = useState({
-    name: "",
-    email: "",
-    gender: "male",
-    age: "",
-    phone: "",
-    password: "",
-    address: "",
-    skills: "",
-  });
+function LabourUpdateProfile({
+  showModal,
+  setShowModal,
+  profileData,
+  setProfileData,
+}) {
+  const [loading, setLoading] = useState(true);
+  const [inputVal, setInputVal] = useState(
+    profileData
+      ? profileData
+      : {
+          name: "",
+          email: "",
+          gender: "male",
+          age: "",
+          phone: "",
+          password: "",
+          address: "",
+          skill: "",
+        }
+  );
 
   function handlerChange(e) {
     const { name, value } = e.target;
 
     setInputVal({ ...inputVal, [name]: value });
+  }
+
+  async function submitHandler(e) {
+    console.log(inputVal);
+    e.preventDefault();
+    const token = localStorage.getItem("shramik_token");
+    if (token) {
+      try {
+        const response = await updateLabourProfile(
+          {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          inputVal
+        );
+        console.log(response);
+        if (response.success === true) {
+          toast.success(response.message);
+          setProfileData(response.data);
+          setShowModal(false);
+        } else if (response.message === "jwt expired") {
+          toast.error(response.message);
+          localStorage.removeItem("shramik_token");
+          localStorage.removeItem("shramik_role");
+          navigate("/login");
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      navigate("/login");
+    }
   }
 
   return (
@@ -110,13 +159,51 @@ function LabourUpdateProfile() {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <label htmlFor="address">Skills*</label>
-                        <textarea
+                        <label htmlFor="skill">Skill*</label>
+                        <select
+                          onChange={handlerChange}
+                          name="skill"
+                          id="skill"
+                          value={inputVal.skill}
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
-                          placeholder="enter address"
-                          id="address"
-                          name="address"
-                          value={inputVal.address}
+                        >
+                          <option value="">---select---</option>
+                          {skills.map((skill, index) => {
+                            return (
+                              <option
+                                value={skill.value}
+                                key={`option_${index}`}
+                              >
+                                {skill.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex gap-5 flex-col md:flex-row">
+                      <div className="flex flex-col">
+                        <label htmlFor="address">Phone*</label>
+                        <input
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          type="nomber"
+                          placeholder="enter phone"
+                          id="phone"
+                          name="phone"
+                          value={inputVal.phone}
+                          onChange={(e) => handlerChange(e)}
+                          required
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <label htmlFor="address">Email*</label>
+                        <input
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          type="email"
+                          placeholder="enter email"
+                          id="pmail"
+                          name="email"
+                          value={inputVal.email}
                           onChange={(e) => handlerChange(e)}
                           required
                         />
@@ -135,7 +222,7 @@ function LabourUpdateProfile() {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={submitHandler}
                   >
                     Save Changes
                   </button>
@@ -146,6 +233,8 @@ function LabourUpdateProfile() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+
+      <Toaster />
     </>
   );
 }

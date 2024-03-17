@@ -5,6 +5,7 @@ import {
   changeProfilePic,
   labourProfile,
   labourRegister,
+  updateLabourProfile,
 } from "../controllers/labour.controllers.js";
 import labourAuthMiddleware from "../middleware/labourAuthMiddleware.js";
 import uploader from "../middleware/multerMiddleware.js";
@@ -17,5 +18,7 @@ router.post(
   labourAuthMiddleware,
   changeProfilePic
 );
+
+router.put("/updateprofile", labourAuthMiddleware, updateLabourProfile);
 
 export default router;

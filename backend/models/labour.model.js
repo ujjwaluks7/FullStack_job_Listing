@@ -31,11 +31,9 @@ const labourSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    skills: [
-      {
-        type: String,
-      },
-    ],
+    skill: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,

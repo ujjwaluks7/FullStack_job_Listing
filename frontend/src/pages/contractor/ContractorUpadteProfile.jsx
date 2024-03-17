@@ -18,6 +18,42 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
     setInputVal({ ...inputVal, [name]: value });
   }
 
+  async function submitHandler(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("shramik_token");
+    if (token) {
+      try {
+        const response = await editSinglePost(
+          {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          id,
+          formData
+        );
+        console.log("formData", formData);
+        console.log(response);
+        if (response.success === true) {
+          toast.success(response.message);
+          navigate("/contractor");
+        } else if (response.message === "jwt expired") {
+          toast.error(response.message);
+          localStorage.removeItem("shramik_token");
+          localStorage.removeItem("shramik_role");
+          navigate("/login");
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      navigate("/login");
+    }
+  }
+
   return (
     <>
       {showModal ? (
@@ -113,7 +149,7 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                         <textarea
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
                           placeholder="enter address"
-                          id="address"
+                          id="sills"
                           name="address"
                           value={inputVal.address}
                           onChange={(e) => handlerChange(e)}

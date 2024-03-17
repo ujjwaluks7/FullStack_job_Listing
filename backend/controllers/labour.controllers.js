@@ -1,5 +1,4 @@
 import Labour from "../models/labour.model.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import path from "path";
 import {
@@ -8,7 +7,7 @@ import {
 } from "../config/cloudinary.js";
 
 // register
-const labourRegister = async (req, res) => {
+export const labourRegister = async (req, res) => {
   const { name, email, gender, age, phone, password } = req.body;
 
   if (!name || !email || !gender || !age || !phone || !password) {
@@ -55,7 +54,7 @@ const labourRegister = async (req, res) => {
 
 // profile
 
-const labourProfile = async (req, res) => {
+export const labourProfile = async (req, res) => {
   const labour = req.user;
 
   if (!labour) {
@@ -69,7 +68,7 @@ const labourProfile = async (req, res) => {
 
 // change profilepic
 
-const changeProfilePic = async (req, res) => {
+export const changeProfilePic = async (req, res) => {
   const file = req.file?.originalname;
   const labourId = req.user?._id;
   const previousImage = req.user?.profilePic;
@@ -144,4 +143,42 @@ const changeProfilePic = async (req, res) => {
   }
 };
 
-export { labourRegister, labourProfile, changeProfilePic };
+// update labour
+
+export const updateLabourProfile = async (req, res) => {
+  const userId = req.user?._id;
+  const { name, email, phone, gender, age, password, address, skill } =
+    req.body;
+
+  const hashPass = password ? await bcrypt.hash(password, 13) : req.user?._id;
+
+  try {
+    const updatedUser = await Labour.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          name,
+          email,
+          phone,
+          gender,
+          age,
+          password: hashPass,
+          address,
+          skill,
+        },
+      },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile update successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
