@@ -7,6 +7,7 @@ import {
   deleteOnCloudinary,
   uploadOnCloudinary,
 } from "../config/cloudinary.js";
+import mongoose from "mongoose";
 // register
 export const contractorRegister = async (req, res) => {
   const {
@@ -168,7 +169,7 @@ export const createJobPost = async (req, res) => {
     address,
   } = req.body;
 
-  const contractorId = req.user?._id;
+  const user = req.user;
 
   if (
     !jobName ||
@@ -193,7 +194,7 @@ export const createJobPost = async (req, res) => {
       jobDescription,
       requiredSkill,
       jobType,
-      author: contractorId,
+      author: user._id,
       state,
       district,
       city,
@@ -203,11 +204,22 @@ export const createJobPost = async (req, res) => {
 
     await newPost.save();
 
+    const updatedUser = await Contractor.findOneAndUpdate(
+      { _id: user._id },
+      { $push: { posts: newPost._id } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      throw new Error("User not found");
+    }
+
     return res.status(200).json({
       success: true,
       message: "Post created successfully",
     });
   } catch (error) {
+    // console.log(error.message);
     return res.status(404).json({
       success: false,
       message: error.message,
@@ -239,17 +251,33 @@ export const showAllPosts = async (req, res) => {
 // delete particular post
 
 export const deleteSinglePost = async (req, res) => {
-  const contractorId = req.user?._id;
+  const user = req.user;
   const postId = req.params.id;
 
   try {
-    const deletedPost = await Post.findByIdAndDelete(postId);
+    // find post
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(400).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    const updatedUser = await Contractor.findByIdAndUpdate(
+      user._id,
+      { $pull: { posts: postId } }, // $pull removes all instances of the value specified
+      { new: true }
+    );
+
+    const deletePost = await Post.findByIdAndDelete(postId);
 
     return res.status(200).json({
       success: true,
       message: "Post deleted successfully",
     });
   } catch (error) {
+    console.log(error.message);
     return res.status(404).json({
       success: false,
       message: error.message,

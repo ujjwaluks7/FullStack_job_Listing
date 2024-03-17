@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Spinner from "../../components/spinner/Spinner";
 import { labourRegistration } from "../../API/apiCall";
+import CRUDForm from "../../components/CRUDForm/CRUDForm";
 
 function LabourRegister() {
   const navigate = useNavigate();
@@ -19,9 +20,24 @@ function LabourRegister() {
   const [showPassword, setShowPassword] = useState("password");
   const [loading, setLoading] = useState(false);
 
-  async function submitHandler(e) {
-    e.preventDefault();
-    const { name, email, gender, age, phone, password } = inputVal;
+  const fields = [
+    { name: "name", label: "Name", type: "text", required: true },
+    { name: "email", label: "Email", type: "email", required: true },
+    { name: "age", label: "Age", type: "number", required: true },
+    {
+      name: "gender",
+      label: "Gender",
+      type: "select",
+      required: true,
+      initialValue: 0,
+      values: ["male", "femail"],
+    },
+    { name: "password", label: "Password", type: "password", required: true },
+  ];
+
+  async function submitHandler(formData) {
+    console.log(formData);
+    const { name, email, gender, age, phone, password } = formData;
 
     if (!name || !email || !password || !gender || !age || !phone) {
       toast.error("All fields are requide");
@@ -44,11 +60,11 @@ function LabourRegister() {
     }
   }
 
-  function handlerChange(e) {
-    const { name, value } = e.target;
+  // function handlerChange(e) {
+  //   const { name, value } = e.target;
 
-    setInputVal({ ...inputVal, [name]: value });
-  }
+  //   setInputVal({ ...inputVal, [name]: value });
+  // }
 
   return (
     <div className="  md:my-[50px] md:mb-16 mb-5 flex items-center justify-center">
@@ -60,7 +76,8 @@ function LabourRegister() {
           <div className="hidden md:block">
             <img className="w-[80%]" src={signupImg} alt="" />
           </div>
-          <form
+
+          {/* <form
             onSubmit={(e) => submitHandler(e)}
             className="flex flex-col items-center gap-4"
           >
@@ -165,7 +182,14 @@ function LabourRegister() {
                 Login
               </Link>
             </p>
-          </form>
+          </form> */}
+
+          <CRUDForm
+            fields={fields}
+            onSubmit={submitHandler}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </div>
       </div>
       <Toaster />
