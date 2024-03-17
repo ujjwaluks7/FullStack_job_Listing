@@ -17,6 +17,7 @@ import img12 from "../assets/carousel_images/12.jpg";
 import services1 from "../assets/services/services_1.webp";
 import plumber from "../assets/services/plumber.jpg";
 import electrician from "../assets/services/electric.jpg";
+import carpenter from "../assets/services/carpenter.jpg";
 // import services1 from "../assets/services/services_1.webp";
 // import services1 from "../assets/services/services_1.webp";
 // import services1 from "../assets/services/services_1.webp";
@@ -43,42 +44,42 @@ export const servicesData = [
     imgUrl: services1,
     title: "Painter",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "Transform your spaces with beauty and finesse, Get the Painting job done by our experts and reshape your dream Home.",
   },
   {
     imgUrl: services1,
     title: "Carpenter",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "We bring traditional charm to modern spaces with our exceptional Carpenter Services.",
   },
   {
     imgUrl: services1,
     title: "Manson",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "Elevate your work speed with expert Masons and reduce construction costs, just a click away.",
   },
   {
     imgUrl: plumber,
     title: "Plumber",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "We deal with everything from small repairs to new installations. Highly trained technicians quickly tackle all your plumbing issues.",
   },
   {
     imgUrl: services1,
-    title: "Welder",
+    title: "Labour",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "Quality Talent at Your Fingertips, Efficiently access Semi-Skilled & Unskilled workers for all Your Construction Needs.",
   },
   {
     imgUrl: electrician,
     title: "Electrician",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "Count on us for all your professional and dependable electrical jobs that keep your property running smoothly and safely.",
   },
   {
     imgUrl: services1,
     title: "Bar Bender",
     content:
-      "Lorem ipsum dolor, saepe possimus.impedit cum eveniet sed voluptas minus. Similique corporis voluptas nam officia!",
+      "Brief Job Description: Bar bender & Steel Fixer is responsible for marking, cutting and bending of rebars using hand or power tools effectively, fabricating, placing and fixing reinforcement at the desired location using correct ties within specified time and tolerance.",
   },
 ];
