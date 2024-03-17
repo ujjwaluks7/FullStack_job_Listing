@@ -1,6 +1,7 @@
 import express from "express";
 import {
   contractorChangeProfilePic,
+  contractorProfile,
   contractorRegister,
   createJobPost,
   deleteSinglePost,
@@ -25,5 +26,6 @@ router.get("/allposts", contractorAuthMiddleware, showAllPosts);
 router.delete("/delete/:id", contractorAuthMiddleware, deleteSinglePost);
 router.get("/view/:id", contractorAuthMiddleware, viewSinglePost);
 router.put("/edit/:id", contractorAuthMiddleware, editSinglePost);
+router.get("/profile", contractorAuthMiddleware, contractorProfile);
 
 export default router;

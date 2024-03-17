@@ -90,3 +90,13 @@ export const editSinglePost = async (header, id, body) => {
     header
   );
 };
+
+export const contractorProfile = async (header, body) => {
+  console.log("body", body);
+  return await apiCommanRequest(
+    "GET",
+    `${BASE_URL}/contractor/profile`,
+    body,
+    header
+  );
+};

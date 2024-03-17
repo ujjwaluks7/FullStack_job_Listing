@@ -7,7 +7,25 @@ import {
   deleteOnCloudinary,
   uploadOnCloudinary,
 } from "../config/cloudinary.js";
-import mongoose from "mongoose";
+
+// fetch contractor porfile
+
+export const contractorProfile = async (req, res) => {
+  const contractorId = req.user?._id;
+
+  try {
+    const contractorData = await Contractor.findById(contractorId).select(
+      "-password"
+    );
+
+    return res
+      .status(200)
+      .json({ success: true, message: "", data: contractorData });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: error.message });
+  }
+};
+
 // register
 export const contractorRegister = async (req, res) => {
   const {
