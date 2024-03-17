@@ -47,7 +47,7 @@ export const servicesData = [
       "Transform your spaces with beauty and finesse, Get the Painting job done by our experts and reshape your dream Home.",
   },
   {
-    imgUrl: services1,
+    imgUrl: carpenter,
     title: "Carpenter",
     content:
       "We bring traditional charm to modern spaces with our exceptional Carpenter Services.",
