@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, memo } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { RxAvatar } from "react-icons/rx";
 
 const SmallModal = ({ isOpen, setIsOpen, role }) => {
+  const navigate = useNavigate();
   const modalRef = useRef();
 
   const toggleModal = () => {
@@ -13,6 +14,13 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  function handleLogout() {
+    localStorage.removeItem("shramik_token");
+    localStorage.removeItem("shramik_role");
+    navigate("/login");
+    closeModal();
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -47,7 +55,7 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
               </NavLink>
               <button
                 className=" bg-red-500 rounded-lg text-white px-3 py-1 flex items-center gap-2"
-                onClick={closeModal}
+                onClick={handleLogout}
               >
                 <IoIosLogOut />
                 Logout

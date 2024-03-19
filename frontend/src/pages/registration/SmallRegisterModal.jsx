@@ -3,15 +3,15 @@ import { NavLink } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { RxAvatar } from "react-icons/rx";
 
-const SmallModal = ({ isOpen, setIsOpen, role }) => {
+const SmallRegisterModal = ({ isOpenRegisterModal, setIsOpenRegisteModal }) => {
   const modalRef = useRef();
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    setIsOpenRegisteModal(!isOpenRegisterModal);
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setIsOpenRegisteModal(false);
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
 
   return (
     <div className="relative" ref={modalRef}>
-      {isOpen && (
+      {isOpenRegisterModal && (
         <div className=" w-[150px] shadow-md flex items-center justify-center">
           <div className="bg-white rounded-lg px-3 py-5 max-w-md">
             <div className="flex items-center flex-col gap-3">
@@ -40,16 +40,16 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
                 onClick={closeModal}
                 to="/contractor/register"
               >
-                Contractor Register
+                Contractor
               </NavLink>
               <NavLink
                 Labour
                 Login
                 className="text-gray-700 font-bold flex items-center gap-1 hover:shadow-md hover:shadow-gray-600 hover:px-2 py-1 rounded-lg"
                 onClick={closeModal}
-                to="/contractor/register"
+                to="/labour/register"
               >
-                Labour Register
+                Labour
               </NavLink>
             </div>
           </div>
@@ -59,8 +59,4 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
   );
 };
 
-// export default Modal;
-
-export default memo(SmallModal);
-
-// export default SmallModal;
+export default memo(SmallRegisterModal);

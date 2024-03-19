@@ -108,12 +108,6 @@ function Login() {
                 </button>
               )}
             </div>
-            <p className="font-bodyFont md:text-lg text-xs">
-              Dont`t have an account?{" "}
-              <Link to="/signup" className="text-blue-600 font-bold">
-                Signup
-              </Link>
-            </p>
           </form>
         </div>
       </div>

@@ -5,11 +5,13 @@ import MobileHeader from "../mobileHeader/MobileHeader";
 import avatarIcon from "../../assets/avatar_icon.png";
 import { getUserInfo } from "../../API/apiCall";
 import SmallModal from "../smallModal/SmallModal";
+import SmallRegisterModal from "../../pages/registration/SmallRegisterModal";
 
 function Header() {
   const [isOpenMobileManu, setIsOpenMobileManu] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRegisterModal, setIsOpenRegisteModal] = useState(false);
 
   useEffect(() => {
     checkIsLogin();
@@ -28,6 +30,10 @@ function Header() {
 
   function handelOpenSmallModal() {
     setIsOpen(true);
+  }
+
+  function handleOpenRegisterModal() {
+    setIsOpenRegisteModal(true);
   }
 
   return (
@@ -86,11 +92,17 @@ function Header() {
                   Login
                 </NavLink>
                 <button
+                  onClick={handleOpenRegisterModal}
                   className="px-2 py-1 bg-red-500 rounded-2xl text-white"
-                  to="/"
                 >
                   Registration
                 </button>
+                <div className="absolute top-14 right-10">
+                  <SmallRegisterModal
+                    isOpenRegisterModal={isOpenRegisterModal}
+                    setIsOpenRegisteModal={setIsOpenRegisteModal}
+                  />
+                </div>
               </>
             )}
           </div>
