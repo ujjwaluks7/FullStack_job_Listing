@@ -144,7 +144,6 @@ export const changeProfilePic = async (req, res) => {
 };
 
 // update labour
-
 export const updateLabourProfile = async (req, res) => {
   const userId = req.user?._id;
   const { name, email, phone, gender, age, password, address, skill } =

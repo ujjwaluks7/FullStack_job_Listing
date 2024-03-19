@@ -1,7 +1,6 @@
 import Contractor from "../models/contractor.model.js";
 import Post from "../models/post.model.js";
 import bcrypt from "bcryptjs";
-import Jwt from "jsonwebtoken";
 import path from "path";
 import {
   deleteOnCloudinary,
@@ -360,6 +359,57 @@ export const editSinglePost = async (req, res) => {
       success: true,
       message: "Post updated successfully",
       data: post,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// update labour
+export const updateContractorProfile = async (req, res) => {
+  // console.log(req.body);
+  const userId = req.user?._id;
+
+  const {
+    name,
+    email,
+    gender,
+    age,
+    phone,
+    password,
+    address,
+    companyName,
+    companyAddress,
+  } = req.body;
+
+  const hashPass = password ? await bcrypt.hash(password, 13) : req.user?._id;
+
+  try {
+    const updatedUser = await Contractor.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          name,
+          email,
+          phone,
+          gender,
+          age,
+          password: hashPass,
+          address,
+          companyAddress,
+          companyName,
+        },
+      },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile update successfully",
+      data: updatedUser,
     });
   } catch (error) {
     return res.status(404).json({

@@ -7,6 +7,7 @@ import {
   deleteSinglePost,
   editSinglePost,
   showAllPosts,
+  updateContractorProfile,
   viewSinglePost,
 } from "../controllers/contractor.controllers.js";
 import contractorAuthMiddleware from "../middleware/contractorAuthMiddleware.js";
@@ -27,5 +28,6 @@ router.delete("/delete/:id", contractorAuthMiddleware, deleteSinglePost);
 router.get("/view/:id", contractorAuthMiddleware, viewSinglePost);
 router.put("/edit/:id", contractorAuthMiddleware, editSinglePost);
 router.get("/profile", contractorAuthMiddleware, contractorProfile);
+router.put("/updateprofile", contractorAuthMiddleware, updateContractorProfile);
 
 export default router;

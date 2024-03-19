@@ -4,12 +4,15 @@ import { MdDateRange, MdOutlineEmail } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { FaRegAddressBook, FaPhone, FaEdit } from "react-icons/fa";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ContractorUpdateProfile from "./ContractorUpadteProfile";
 import { contractorProfile } from "../../API/apiCall";
 import Spinner from "../../components/spinner/Spinner";
+import toast, { Toaster } from "react-hot-toast";
+import avatar from "../../assets/avatar_icon.png";
 
 function ContractorProfile() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [loader, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({});
@@ -32,6 +35,8 @@ function ContractorProfile() {
           toast.error(response.message);
           localStorage.removeItem("shramik_token");
           localStorage.removeItem("shramik_role");
+          navigate("/login");
+        } else if (response.message == "Contractor not found") {
           navigate("/login");
         } else {
           toast.error(response.message);
@@ -56,9 +61,9 @@ function ContractorProfile() {
         <div className="my-5 md:w-[50vw] w-[90vw]  shadow-lg rounded-md p-4  shadow-gray-300">
           <div className="flex justify-center relative">
             <img
-              className=""
+              className="w-[200px]"
               style={{ clipPath: "circle()" }}
-              src={profileData.profilePic}
+              src={profileData.profilePic ? profileData.profilePic : avatar}
               alt="profile image"
             />
             <p className="absolute bottom-20 left-[60%]">
@@ -145,8 +150,11 @@ function ContractorProfile() {
             <ContractorUpdateProfile
               showModal={showModal}
               setShowModal={setShowModal}
+              profileData={profileData}
+              setProfileData={setProfileData}
             />
           )}
+          <Toaster />
         </div>
       )}
     </Layout>

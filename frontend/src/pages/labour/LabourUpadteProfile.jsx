@@ -10,7 +10,7 @@ function LabourUpdateProfile({
   profileData,
   setProfileData,
 }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [inputVal, setInputVal] = useState(
     profileData
       ? profileData
@@ -33,8 +33,8 @@ function LabourUpdateProfile({
   }
 
   async function submitHandler(e) {
-    console.log(inputVal);
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem("shramik_token");
     if (token) {
       try {
@@ -224,17 +224,16 @@ function LabourUpdateProfile({
                     type="button"
                     onClick={submitHandler}
                   >
-                    Save Changes
+                    {loading ? <Spinner /> : "Save Changes"}
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          <Toaster />
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-
-      <Toaster />
     </>
   );
 }

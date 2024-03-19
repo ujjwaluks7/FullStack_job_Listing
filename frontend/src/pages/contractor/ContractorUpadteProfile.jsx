@@ -1,17 +1,30 @@
 import React, { useState } from "react";
-import { contractorProfile } from "../../API/apiCall";
+import { contractorProfile, updateContractorProfile } from "../../API/apiCall";
+import toast, { Toaster } from "react-hot-toast";
+import Spinner from "../../components/spinner/Spinner";
 
-function ContractorUpdateProfile({ showModal, setShowModal }) {
-  const [inputVal, setInputVal] = useState({
-    name: "",
-    email: "",
-    gender: "male",
-    age: "",
-    phone: "",
-    password: "",
-    address: "",
-    skills: "",
-  });
+function ContractorUpdateProfile({
+  showModal,
+  setShowModal,
+  profileData,
+  setProfileData,
+}) {
+  const [loading, setLoading] = useState(false);
+  const [inputVal, setInputVal] = useState(
+    profileData
+      ? profileData
+      : {
+          name: "",
+          email: "",
+          gender: "",
+          age: "",
+          phone: "",
+          password: "",
+          address: "",
+          companyName: "",
+          companyAddress: "",
+        }
+  );
 
   function handlerChange(e) {
     const { name, value } = e.target;
@@ -19,23 +32,24 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
   }
 
   async function submitHandler(e) {
+    console.log(inputVal);
     e.preventDefault();
     const token = localStorage.getItem("shramik_token");
     if (token) {
       try {
-        const response = await editSinglePost(
+        setLoading(true);
+        const response = await updateContractorProfile(
           {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          id,
-          formData
+          inputVal
         );
-        console.log("formData", formData);
         console.log(response);
         if (response.success === true) {
           toast.success(response.message);
-          navigate("/contractor");
+          setProfileData(response.data);
+          setShowModal(false);
         } else if (response.message === "jwt expired") {
           toast.error(response.message);
           localStorage.removeItem("shramik_token");
@@ -76,7 +90,7 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                   <form className="flex flex-col gap-2">
                     <div className="flex gap-5 flex-col md:flex-row">
                       <div className="flex flex-col ">
-                        <label htmlFor="name">Name*</label>
+                        <label htmlFor="name">Name</label>
                         <input
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
                           type="text"
@@ -89,11 +103,12 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <label htmlFor="gender">Gender*</label>
+                        <label htmlFor="gender">Gender</label>
                         <select
                           onChange={(e) => handlerChange(e)}
-                          name=""
+                          name="gender"
                           id="gender"
+                          value={inputVal.gender}
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
                         >
                           <option value="male">male</option>
@@ -104,7 +119,7 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
 
                     <div className="flex gap-5 flex-col md:flex-row">
                       <div className="flex flex-col">
-                        <label htmlFor="age">Age*</label>
+                        <label htmlFor="age">Age</label>
                         <input
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
                           type="number"
@@ -116,8 +131,61 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                           required
                         />
                       </div>
+
                       <div className="flex flex-col relative">
-                        <label htmlFor="pass">Password*</label>
+                        <label htmlFor="email">Email</label>
+                        <input
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          type="email"
+                          placeholder="enter password"
+                          id="email"
+                          name="email"
+                          value={inputVal.email}
+                          onChange={(e) => handlerChange(e)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-5 flex-col md:flex-row">
+                      <div className="flex flex-col">
+                        <label htmlFor="address">Address</label>
+                        <textarea
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          placeholder="enter address"
+                          id="address"
+                          name="address"
+                          value={inputVal.address}
+                          onChange={(e) => handlerChange(e)}
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <label htmlFor="companyName">Company Name</label>
+                        <input
+                          type="text"
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          placeholder="enter company name"
+                          id="companyName"
+                          name="companyName"
+                          value={inputVal.companyName}
+                          onChange={(e) => handlerChange(e)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-5 flex-col md:flex-row">
+                      <div className="flex flex-col">
+                        <label htmlFor="companyAddress">Company Address</label>
+                        <textarea
+                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                          placeholder="enter address"
+                          id="companyAddress"
+                          name="companyAddress"
+                          value={inputVal.companyAddress}
+                          onChange={(e) => handlerChange(e)}
+                        />
+                      </div>
+                      <div className="flex flex-col relative">
+                        <label htmlFor="pass">Password</label>
                         <input
                           className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
                           type="password"
@@ -126,34 +194,6 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                           name="password"
                           value={inputVal.password}
                           onChange={(e) => handlerChange(e)}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex gap-5 flex-col md:flex-row">
-                      <div className="flex flex-col">
-                        <label htmlFor="address">Address*</label>
-                        <textarea
-                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
-                          placeholder="enter address"
-                          id="address"
-                          name="address"
-                          value={inputVal.address}
-                          onChange={(e) => handlerChange(e)}
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label htmlFor="address">Skills*</label>
-                        <textarea
-                          className=" py-1 md:w-[20vw]  border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
-                          placeholder="enter address"
-                          id="sills"
-                          name="address"
-                          value={inputVal.address}
-                          onChange={(e) => handlerChange(e)}
-                          required
                         />
                       </div>
                     </div>
@@ -170,14 +210,15 @@ function ContractorUpdateProfile({ showModal, setShowModal }) {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={submitHandler}
                   >
-                    Save Changes
+                    {loading ? <Spinner /> : "Save Changes"}
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          <Toaster />
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}

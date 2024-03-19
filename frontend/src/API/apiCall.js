@@ -107,3 +107,14 @@ export const updateLabourProfile = async (header, body) => {
     header
   );
 };
+
+export const updateContractorProfile = async (header, body) => {
+  // console.log("body", body);
+
+  return await apiCommanRequest(
+    "PUT",
+    `${BASE_URL}/contractor/updateprofile`,
+    body,
+    header
+  );
+};
