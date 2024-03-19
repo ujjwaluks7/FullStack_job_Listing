@@ -2,6 +2,7 @@ import Contractor from "../models/contractor.model.js";
 import Labour from "../models/labour.model.js";
 import bcrypt from "bcryptjs";
 import Jwt from "jsonwebtoken";
+import Post from "../models/post.model.js";
 
 // login
 export const login = async (req, res) => {
@@ -70,4 +71,23 @@ export const userInfo = async (req, res) => {
   }
 
   res.status(200).json({ success: true, message: "", data: user });
+};
+
+// all posts
+
+export const allPosts = async (req, res) => {
+  try {
+    const allPosts = await Post.find().populate("author");
+
+    return res.status(200).json({
+      success: true,
+      message: "",
+      data: allPosts,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };

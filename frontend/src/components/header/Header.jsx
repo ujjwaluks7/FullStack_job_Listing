@@ -52,7 +52,7 @@ function Header() {
             </NavLink>
             <NavLink
               className="hover:shadow-md hover:shadow-gray-600 px-2 py-1 rounded-lg"
-              to="/"
+              to="/dailywork"
             >
               Daily works
             </NavLink>

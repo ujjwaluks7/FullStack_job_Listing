@@ -14,6 +14,7 @@ import LabourUpdateProfile from "./pages/labour/LabourUpadteProfile";
 import CreatePost from "./pages/contractor/CreatePost";
 import ContractorSinglePost from "./pages/contractor/ContractorSinglePost";
 import ContractorEditPost from "./pages/contractor/ContractorEditPost";
+import DailyWork from "./pages/DailyWork/DailyWork";
 // import ContractorEdit
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
           />
 
           <Route path="/update" element={<LabourUpdateProfile />} />
+          <Route path="/dailywork" element={<DailyWork />} />
         </Routes>
         <Footer />
       </BrowserRouter>

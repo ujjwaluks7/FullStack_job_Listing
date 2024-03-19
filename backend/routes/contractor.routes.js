@@ -29,5 +29,6 @@ router.get("/view/:id", contractorAuthMiddleware, viewSinglePost);
 router.put("/edit/:id", contractorAuthMiddleware, editSinglePost);
 router.get("/profile", contractorAuthMiddleware, contractorProfile);
 router.put("/updateprofile", contractorAuthMiddleware, updateContractorProfile);
+// router.get("/allpost", allPosts);
 
 export default router;
