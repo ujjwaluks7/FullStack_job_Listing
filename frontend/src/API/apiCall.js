@@ -120,3 +120,7 @@ export const updateContractorProfile = async (header, body) => {
 export const allPosts = async (header, body) => {
   return await apiCommanRequest("GET", `${BASE_URL}/dalywork`, body, header);
 };
+
+export const postApply = async (header, body) => {
+  return await apiCommanRequest("POST", `${BASE_URL}/postapply`, body, header);
+};

@@ -3,6 +3,7 @@ import Labour from "../models/labour.model.js";
 import bcrypt from "bcryptjs";
 import Jwt from "jsonwebtoken";
 import Post from "../models/post.model.js";
+import mongoose from "mongoose";
 
 // login
 export const login = async (req, res) => {
@@ -42,7 +43,7 @@ export const login = async (req, res) => {
 
     // generate token
     const token = Jwt.sign(
-      { userId: existUser._id, role: existUser.role },
+      { userId: existUser._id, role: existUser.role, userId: existUser._id },
       process.env.JWT_SECRET_KEY,
       {
         expiresIn: "30d",
@@ -52,7 +53,7 @@ export const login = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "user successfully login",
-      data: { token: token, role: existUser.role },
+      data: { token: token, role: existUser.role, userId: existUser._id },
     });
   } catch (error) {
     console.log(error);
@@ -90,4 +91,56 @@ export const allPosts = async (req, res) => {
       message: error.message,
     });
   }
+};
+
+// post apply
+
+export const postApply = async (req, res) => {
+  const userId = req.user?._id;
+  const { postId } = req.body;
+  const isPostExist = await Post.findById(postId);
+
+  if (!isPostExist) {
+    return res.status(404).json({
+      success: false,
+      message: "Post not found",
+    });
+  }
+
+  const session = await mongoose.startSession();
+  await session.startTransaction();
+  try {
+    const postApplyed = await Post.findByIdAndUpdate(postId, {
+      $addToSet: { totalApplied: userId },
+    });
+
+    const labour = await Labour.findByIdAndUpdate(userId, {
+      $addToSet: { applayed: postId },
+    });
+
+    const allPosts = await Post.find().populate("author");
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return res.status(200).json({
+      success: true,
+      message: "You are applyed this post",
+      data: allPosts,
+    });
+  } catch (err) {
+    console.log("error", err);
+    await session.abortTransaction();
+    session.endSession();
+    return res.status(404).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+// search
+
+export const searchPost = async (req, res) => {
+  console.log(req.query.q);
 };

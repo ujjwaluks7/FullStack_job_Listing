@@ -43,6 +43,12 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    totalApplied: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Labour",
+      },
+    ],
   },
   { timestamps: true }
 );

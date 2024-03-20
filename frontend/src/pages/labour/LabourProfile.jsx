@@ -125,7 +125,7 @@ function LabourProfile() {
             <div className="flex items-center justify-between border-b-2 py-3">
               <div className="flex items-center gap-2">
                 <BsFileEarmarkPostFill className="text-3xl" />
-                <Link to="/contractor" className="text-blue-500 cursor-pointer">
+                <Link className="text-blue-500 cursor-pointer">
                   Toatal Applied :-
                 </Link>
               </div>

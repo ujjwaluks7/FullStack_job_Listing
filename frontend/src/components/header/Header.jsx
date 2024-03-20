@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import MobileHeader from "../mobileHeader/MobileHeader";
@@ -6,6 +6,7 @@ import avatarIcon from "../../assets/avatar_icon.png";
 import { getUserInfo } from "../../API/apiCall";
 import SmallModal from "../smallModal/SmallModal";
 import SmallRegisterModal from "../../pages/registration/SmallRegisterModal";
+import { appContext } from "../../App";
 
 function Header() {
   const [isOpenMobileManu, setIsOpenMobileManu] = useState(false);
@@ -13,9 +14,11 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenRegisterModal, setIsOpenRegisteModal] = useState(false);
 
+  const { userDetail } = useContext(appContext);
+
   useEffect(() => {
     checkIsLogin();
-  }, []);
+  }, [userDetail]);
 
   async function checkIsLogin() {
     const token = localStorage.getItem("shramik_token");
@@ -62,10 +65,6 @@ function Header() {
             >
               Service
             </NavLink>
-
-            <button className="hover:shadow-md hover:shadow-gray-600 px-2 py-1 rounded-lg">
-              Language
-            </button>
             {isLogin ? (
               <div className="flex items-center gap-3 relative">
                 <p>{isLogin?.name}</p>

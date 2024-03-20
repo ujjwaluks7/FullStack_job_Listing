@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login_img.png";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEyeSlash, FaEye, FaGoogle } from "react-icons/fa";
 import Spinner from "../../components/spinner/Spinner";
 import { login } from "../../API/apiCall";
+import { appContext } from "../../App";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ function Login() {
 
   const [showPassword, setShowPassword] = useState("password");
   const [loading, setLoading] = useState(false);
+
+  const { setUserDetail } = useContext(appContext);
 
   async function loginForm(e) {
     e.preventDefault();
@@ -34,6 +37,8 @@ function Login() {
         toast.success(respnse.message);
         localStorage.setItem("shramik_token", respnse?.data?.token);
         localStorage.setItem("shramik_role", respnse?.data?.role);
+        localStorage.setItem("shramik_id", respnse?.data?.userId);
+        setUserDetail(respnse.data);
         setLoading(false);
         if (respnse.data.role === "Contractor") {
           navigate("/contractor");
@@ -102,7 +107,7 @@ function Login() {
               ) : (
                 <button
                   onClick={(e) => loginForm(e)}
-                  className=" hover:shadow-md"
+                  className=" hover:shadow-md w-full"
                 >
                   Login
                 </button>

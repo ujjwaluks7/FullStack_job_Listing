@@ -82,6 +82,8 @@ function DailyWork() {
                 date={post.createdAt}
                 authorName={post.author?.name}
                 companyName={post.author?.companyName}
+                postId={post?._id}
+                totalApplied={post.totalApplied}
               />
             </Fragment>
           ))}

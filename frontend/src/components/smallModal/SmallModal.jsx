@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect, memo } from "react";
+import React, { useState, useRef, useEffect, memo, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { RxAvatar } from "react-icons/rx";
+import { appContext } from "../../App";
 
 const SmallModal = ({ isOpen, setIsOpen, role }) => {
   const navigate = useNavigate();
   const modalRef = useRef();
+
+  const { setUserDetail } = useContext(appContext);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -20,6 +23,7 @@ const SmallModal = ({ isOpen, setIsOpen, role }) => {
     localStorage.removeItem("shramik_role");
     navigate("/login");
     closeModal();
+    setUserDetail(false);
   }
 
   useEffect(() => {

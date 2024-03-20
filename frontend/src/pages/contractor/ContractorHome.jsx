@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
@@ -13,6 +13,7 @@ import Spinner from "../../components/spinner/Spinner";
 import { CiCalendarDate } from "react-icons/ci";
 
 function ContractorHome() {
+  const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 

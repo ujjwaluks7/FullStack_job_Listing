@@ -30,7 +30,7 @@ export class Home extends Component {
         <SmallModal />
         <div className="sm:px-[60px] px-5 py-5">
           <h2 className="text-3xl font-bold pb-3 ">Our Services</h2>
-          <div className=" flex overflow-x-auto  ">
+          <div id="/#services" className=" flex overflow-x-auto  ">
             <Services />
           </div>
         </div>
