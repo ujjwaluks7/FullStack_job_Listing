@@ -62,7 +62,7 @@ function LabourProfile() {
             <img
               className=" w-[200px]"
               style={{ clipPath: "circle()" }}
-              src={profileData.profilePic ? avatar : profileData.profilePic}
+              src={avatar}
               alt="profile image"
             />
             <p className="cursor-pointer absolute bottom-[50px] left-[60%]">

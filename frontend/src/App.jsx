@@ -15,6 +15,7 @@ import CreatePost from "./pages/contractor/CreatePost";
 import ContractorSinglePost from "./pages/contractor/ContractorSinglePost";
 import ContractorEditPost from "./pages/contractor/ContractorEditPost";
 import DailyWork from "./pages/DailyWork/DailyWork";
+import PageNotFoundPage from "./pages/404Page/PageNotFoundPage";
 
 export const appContext = createContext();
 
@@ -85,6 +86,7 @@ function App() {
 
             <Route path="/update" element={<LabourUpdateProfile />} />
             <Route path="/dailywork" element={<DailyWork />} />
+            <Route path="/*" element={<PageNotFoundPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -43,6 +43,9 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    postPic: {
+      type: String,
+    },
     totalApplied: [
       {
         type: mongoose.Schema.Types.ObjectId,

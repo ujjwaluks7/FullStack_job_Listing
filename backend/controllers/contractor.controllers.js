@@ -47,8 +47,6 @@ export const contractorRegister = async (req, res) => {
     !phone ||
     !password ||
     !address ||
-    !companyName ||
-    !companyAddress ||
     !password
   ) {
     return res

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
-
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import SmallModal from "../smallModal/SmallModal";
+import avatar from "../../assets/avatar_icon.png";
+
 function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenLeftModal, setIsOpenLeftModal] = useState(false);
@@ -45,7 +46,7 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
               <img
                 onClick={handelOpenSmallLeftModal}
                 className="w-[40px] cursor-pointer"
-                src={isLogin?.profilePic}
+                src={avatar}
                 alt="avatar image"
               />
             ) : (

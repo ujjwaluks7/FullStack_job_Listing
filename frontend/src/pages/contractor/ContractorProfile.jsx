@@ -63,7 +63,7 @@ function ContractorProfile() {
             <img
               className="w-[200px]"
               style={{ clipPath: "circle()" }}
-              src={profileData.profilePic ? profileData.profilePic : avatar}
+              src={avatar}
               alt="profile image"
             />
             <p className="absolute bottom-20 left-[60%]">

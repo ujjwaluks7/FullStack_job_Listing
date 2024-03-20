@@ -196,7 +196,7 @@ function ContractorRegister() {
               {loading ? (
                 <Spinner />
               ) : (
-                <button className=" hover:shadow-md">Signup</button>
+                <button className=" hover:shadow-md w-full">Signup</button>
               )}
             </div>
             <p className="font-bodyFont text-xs md:text-lg">

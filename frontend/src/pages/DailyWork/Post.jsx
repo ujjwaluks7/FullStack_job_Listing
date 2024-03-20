@@ -22,6 +22,7 @@ function Post({
   postId,
   setFilterData,
   totalApplied,
+  postPic,
 }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -80,7 +81,11 @@ function Post({
       {console.log(applyedThisPost)}
       <div className="flex flex-col md:flex-row-reverse">
         <div>
-          <img className="w-[100%] rounded-lg" src={image} alt="" />
+          <img
+            className="w-[100%] rounded-lg"
+            src={postPic ? postPic : image}
+            alt=""
+          />
         </div>
         <div className="w-[100%]">
           <h3 className="font-bold my-2">{jobName}</h3>

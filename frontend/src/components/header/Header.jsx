@@ -39,6 +39,14 @@ function Header() {
     setIsOpenRegisteModal(true);
   }
 
+  const scrollToServices = () => {
+    // Scroll to the services section
+    const servicesSection = document.getElementById("services-section");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className=" justify-center">
       <div className="  z-40 bg-white md:px-[50px] py-2 px-[10px]  shadow-md shadow-gray-300 sticky top-0">
@@ -59,19 +67,19 @@ function Header() {
             >
               Daily works
             </NavLink>
-            <NavLink
+            <button
+              onClick={scrollToServices}
               className="hover:shadow-md hover:shadow-gray-600 px-2 py-1 rounded-lg"
-              to="/"
             >
               Service
-            </NavLink>
+            </button>
             {isLogin ? (
               <div className="flex items-center gap-3 relative">
                 <p>{isLogin?.name}</p>
                 <img
                   onClick={handelOpenSmallModal}
                   className="w-[40px] cursor-pointer"
-                  src={isLogin?.profilePic}
+                  src={avatarIcon}
                   alt="avatar image"
                 />
                 <div className="absolute top-11 left-10">
