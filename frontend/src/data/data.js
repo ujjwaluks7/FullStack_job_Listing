@@ -38,7 +38,6 @@ export const carouselImagesData = [
   img12,
 ];
 
-
 export const servicesData = [
   {
     imgUrl: services1,
@@ -80,6 +79,6 @@ export const servicesData = [
     imgUrl: services1,
     title: "Bar Bender",
     content:
-      "Brief Job Description: Bar bender & Steel Fixer is responsible for marking, cutting and bending of rebars using hand or power tools effectively, fabricating, placing and fixing reinforcement at the desired location using correct ties within specified time and tolerance.",
+      "Brief Job Description: Bar bender & Steel Fixer is responsible for marking, cutting and bending of rebars using hand or power tools effectively, fabricating, placing and fixing reinforcement .",
   },
 ];

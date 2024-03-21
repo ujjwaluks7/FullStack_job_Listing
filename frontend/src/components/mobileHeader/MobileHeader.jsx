@@ -5,10 +5,12 @@ import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import SmallModal from "../smallModal/SmallModal";
 import avatar from "../../assets/avatar_icon.png";
+import SmallRegisterModal from "../../pages/registration/SmallRegisterModal";
 
 function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenLeftModal, setIsOpenLeftModal] = useState(false);
+  const [isOpenRegisterModal, setIsOpenRegisteModal] = useState(false);
 
   function handelOpenSmallModal() {
     setIsOpen(true);
@@ -16,6 +18,10 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
 
   function handelOpenSmallLeftModal() {
     setIsOpenLeftModal(true);
+  }
+
+  function handleOpenRegisterModal() {
+    setIsOpenRegisteModal(true);
   }
 
   return (
@@ -59,11 +65,17 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
                   Login
                 </NavLink>
                 <button
+                  onClick={handleOpenRegisterModal}
                   className="px-4 py-1 bg-red-500 rounded-2xl text-white"
-                  to="/"
                 >
                   Registration
                 </button>
+                <div className="absolute top-28 right-0">
+                  <SmallRegisterModal
+                    isOpenRegisterModal={isOpenRegisterModal}
+                    setIsOpenRegisteModal={setIsOpenRegisteModal}
+                  />
+                </div>
               </>
             )}
             <NavLink
@@ -87,9 +99,6 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
             >
               Service
             </NavLink>
-            <button className="hover:shadow-md hover:shadow-gray-600 px-2 py-1 rounded-lg">
-              Language
-            </button>
           </div>
         </div>
       </div>
@@ -101,7 +110,7 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
             <img
               onClick={handelOpenSmallModal}
               className="w-[40px] cursor-pointer"
-              src={isLogin?.profilePic}
+              src={avatar}
               alt="avatar image"
             />
 
@@ -121,7 +130,7 @@ function MobileHeader({ isOpenMobileManu, setIsOpenMobileManu, isLogin }) {
             Login
           </NavLink>
         )}
-        <img className="w-[40px]" src={logo} alt="" />
+        <img className="w-[40px]" src={logo} alt="logo" />
       </div>
     </div>
   );

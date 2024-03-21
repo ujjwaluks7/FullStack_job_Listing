@@ -7,6 +7,7 @@ import { getUserInfo } from "../../API/apiCall";
 import SmallModal from "../smallModal/SmallModal";
 import SmallRegisterModal from "../../pages/registration/SmallRegisterModal";
 import { appContext } from "../../App";
+import toast, { Toaster } from "react-hot-toast";
 
 function Header() {
   const [isOpenMobileManu, setIsOpenMobileManu] = useState(false);
@@ -24,8 +25,11 @@ function Header() {
     const token = localStorage.getItem("shramik_token");
     if (token) {
       const response = await getUserInfo({ authorization: `Bearer ${token}` });
-      console.log(response);
-      setIsLogin(response.data);
+      if (response.success == true) {
+        setIsLogin(response.data);
+      } else {
+        toast.error(response.message);
+      }
     } else {
       setIsLogin(false);
     }
@@ -122,6 +126,7 @@ function Header() {
           />
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

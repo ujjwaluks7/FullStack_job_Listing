@@ -8,11 +8,11 @@ function Services() {
         {servicesData?.map((service, i) => {
           return (
             <div
-              className="flex flex-col items-center w-[250px] rounded-md p-4 bg-gray-200"
+              className=" flex flex-col items-center w-[250px] rounded-md p-4 bg-gray-200 hover:shadow-lg hover:shadow-gray-400 duration-500"
               key={i}
             >
               <div
-                className="bg-orange-500 p-2"
+                className="bg-orange-500 p-2 w-[170px]"
                 style={{ clipPath: "circle()" }}
               >
                 <img

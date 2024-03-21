@@ -38,6 +38,8 @@ function ContractorHome() {
         localStorage.removeItem("shramik_role");
         setLoading(false);
         navigate("/login");
+      } else if (response.message == "Contractor not found") {
+        navigate("/");
       } else {
         toast.error(response.message);
         setLoading(false);
