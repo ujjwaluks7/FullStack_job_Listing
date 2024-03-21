@@ -22,6 +22,7 @@ function ContractorEditPost() {
     city: "",
     pincode: "",
     address: "",
+    postPic: "",
   });
 
   function handlerChange(e) {
@@ -242,6 +243,18 @@ function ContractorEditPost() {
                 onChange={(e) => handlerChange(e)}
                 value={formData.address}
                 name="address"
+              />
+            </div>
+            <div className="flex flex-col mt-2">
+              <label htmlFor="postPic">Post Image Url</label>
+              <input
+                className=" py-1 border-2 border-gray-300 rounded-lg px-2 focus:outline-none shadow-md shadow-gray-200"
+                type="url"
+                placeholder="Enter post image url"
+                id="postPic"
+                onChange={(e) => handlerChange(e)}
+                value={formData.postPic}
+                name="postPic"
               />
             </div>
             <div className="bg-blue-500 w-full rounded-lg flex justify-center  text-white text-lg py-1 mt-5">

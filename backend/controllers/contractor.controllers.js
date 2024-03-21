@@ -182,6 +182,7 @@ export const createJobPost = async (req, res) => {
     city,
     pincode,
     address,
+    postPic,
   } = req.body;
 
   const user = req.user;
@@ -215,6 +216,7 @@ export const createJobPost = async (req, res) => {
       city,
       pincode,
       address,
+      postPic,
     });
 
     await newPost.save();
@@ -336,6 +338,7 @@ export const editSinglePost = async (req, res) => {
     city,
     pincode,
     address,
+    postPic,
   } = req.body;
 
   try {
@@ -350,6 +353,7 @@ export const editSinglePost = async (req, res) => {
         city,
         pincode,
         address,
+        postPic,
       },
     });
 
